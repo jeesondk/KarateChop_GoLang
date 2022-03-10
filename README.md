@@ -1,4 +1,4 @@
-# KarateChop Go implementation
+# Karate chop - Go implementation
 Solution for kata: http://codekata.com/kata/kata02-karate-chop/
 
 ## Version
