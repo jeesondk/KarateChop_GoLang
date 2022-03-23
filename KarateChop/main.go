@@ -10,7 +10,7 @@ var _chop int
 // ChopChop BinarySearch implementation
 func ChopChop(input []int, chop int) int {
 
-	fmt.Println("Got Array: %v, chopping for: %v", input, chop)
+	fmt.Printf("Got Array: %v, chopping for: %v\n", input, chop)
 	if !isValid(input) {
 		return -1
 	}
@@ -29,8 +29,8 @@ func ChopChop(input []int, chop int) int {
 
 func doChop(input []int) bool {
 
-	chop := chopPos(len(input))
-	valAtChop := input[chop]
+	//chop := chopPos(len(input))
+	valAtChop := input[_pos]
 
 	if valAtChop == _chop {
 		_break = true
@@ -40,7 +40,11 @@ func doChop(input []int) bool {
 		_break = true
 	}
 
-	for !_break {
+	for {
+		if _break {
+			break
+		}
+
 		var intSlice = make([]int, len(input))
 		if valAtChop <= _chop {
 			intSlice = chopHigh(input)
@@ -57,12 +61,29 @@ func chopPos(arrLen int) int {
 	return arrLen / 2
 }
 
-func chopLow([]int) []int {
-	return []int{}
+func chopLow(arr []int) []int {
+	lowBounds := len(arr) / 2
+	lowSelection := arr[:lowBounds]
+
+	_pos--
+
+	return lowSelection
 }
 
-func chopHigh([]int) []int {
-	return []int{}
+func chopHigh(arr []int) []int {
+	var highBounds int
+
+	if len(arr)%2 == 0 {
+		highBounds = len(arr) / 2
+	} else {
+		highBounds = len(arr)/2 + 1
+	}
+
+	highSelection := arr[highBounds:]
+
+	_pos += highBounds - 1
+
+	return highSelection
 }
 
 func checkValue() bool {
